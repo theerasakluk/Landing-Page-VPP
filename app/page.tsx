@@ -94,11 +94,14 @@ export default function Home() {
         </a>
         <div className="nav-links">
           <a href="#top">หน้าแรก</a>
-          <a href="#quote">ช่วยเหลือ</a>
-          <a href="#corporate">เกี่ยวกับเรา</a>
-          <a href="#quote">How to</a>
+          <a href="#about">เกี่ยวกับเรา</a>
+          <a href="#articles">บทความ</a>
+          <a href="#app">App</a>
         </div>
-        <div className="contact-line">Contact Center: 02-XXX-XXXX</div>
+        <div className="contact-line">
+          <span>Tel: (083) 178-6446 คุณรุ้ง</span>
+          <span>(061) 057-8761 คุณกิม</span>
+        </div>
       </nav>
 
       <section className="hero-banner" aria-label="V Power Plus Shop Online">
@@ -111,7 +114,7 @@ export default function Home() {
           <p className="hero-subtitle">V Power Plus Catalog Online</p>
           <p className="hero-text">
             เลือกหมวดสินค้า เพิ่มรายการที่ต้องการ แล้วส่งคำขอใบเสนอราคาให้ทีม V Power Plus
-            ดูแลต่ออย่างเป็นระบบสำหรับลูกค้าทั่วไปและลูกค้าองค์กร
+            ดูแลต่ออย่างเป็นระบบสำหรับลูกค้าทั่วไป สถานศึกษา องค์กร และหน่วยงานราชการ
           </p>
           <div className="hero-actions">
             <a className="primary-button" href="#quote">
@@ -155,6 +158,35 @@ export default function Home() {
         ))}
       </section>
 
+      <section className="app-strip" id="app" aria-label="V Power Plus App">
+        <div>
+          <p className="quote-kicker">V Power Plus App</p>
+          <h2>เตรียมรายการสินค้าและขอใบเสนอราคาได้สะดวกขึ้น</h2>
+        </div>
+        <a className="secondary-button" href="#quote">
+          ติดต่อสอบถาม App
+        </a>
+      </section>
+
+      <section className="about-section" id="about">
+        <div className="section-title">
+          <span aria-hidden="true">+</span>
+          <h2>เกี่ยวกับเรา</h2>
+        </div>
+        <div className="about-content">
+          <p>
+            <strong>V Power Plus</strong> (วีพาวเวอร์พลัส) ร้านจำหน่ายสินค้าอุปกรณ์หลากหลายเช่น
+            อุปกรณ์สำนักงาน ไอที เครื่องมือ เฟอร์นิเจอร์ และโซล่าร์รูฟท็อป พร้อมให้บริการลูกค้าทั่วไป
+            สถานศึกษา องค์กร และหน่วยงานราชการต่างๆ ด้วยสินค้าหลายหมวดหมู่ที่ตอบโจทย์การใช้งานในที่เดียว
+          </p>
+          <p>
+            ร้านตั้งอยู่ที่ <strong>อ.เมือง จ.หนองบัวลำภู</strong> เส้นหน้าวัดโพธิ์ หรือเส้นโรงพยาบาลหมอวีระพล
+            หากเดินทางมาจากโรงพยาบาลหรือวัด ให้ผ่านสี่แยกไฟแดง แล้วร้านจะอยู่ฝั่งซ้ายมือ
+            ห่างจากแยกประมาณ 200 เมตร ยินดีต้อนรับลูกค้าทุกท่านครับ/ค่ะ
+          </p>
+        </div>
+      </section>
+
       <section className="category-section" id="categories">
         <div className="section-title">
           <span aria-hidden="true">+</span>
@@ -176,6 +208,27 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="quote-panel" id="articles">
+        <div className="quote-copy">
+          <p className="quote-kicker">บทความ</p>
+          <h2>แนวทางเลือกสินค้าให้เหมาะกับงานจัดซื้อ</h2>
+          <p>
+            รวมคำแนะนำเบื้องต้นสำหรับการเลือกอุปกรณ์สำนักงาน ไอที เครื่องมือ เฟอร์นิเจอร์
+            และสินค้าโซล่าร์รูฟท็อป เพื่อช่วยให้จัดเตรียมรายการขอใบเสนอราคาได้ง่ายขึ้น
+          </p>
+        </div>
+        <div className="article-list" aria-label="รายการบทความ">
+          <article>
+            <strong>เตรียมรายการขอใบเสนอราคาอย่างไรให้ทีมงานประเมินได้เร็ว</strong>
+            <span>ระบุหมวด จำนวน รุ่นที่ต้องการ และสถานที่จัดส่งให้ครบถ้วน</span>
+          </article>
+          <article>
+            <strong>เลือกอุปกรณ์สำนักงานสำหรับองค์กรควรดูอะไรบ้าง</strong>
+            <span>พิจารณาการใช้งานจริง ความคุ้มค่า และการจัดซื้อซ้ำในอนาคต</span>
+          </article>
+        </div>
+      </section>
+
       <section className="quote-panel" id="quote">
         <div className="quote-copy">
           <p className="quote-kicker">Request a quotation</p>
@@ -188,6 +241,11 @@ export default function Home() {
             <span>01 เลือกสินค้า</span>
             <span>02 ส่งรายการ</span>
             <span>03 รับใบเสนอราคา</span>
+          </div>
+          <div className="contact-card">
+            <strong>Contact Center</strong>
+            <span>Tel: (083) 178-6446 (คุณรุ้ง), (061) 057-8761 (คุณกิม)</span>
+            <span>Email: VPowerPlusTH@gmail.com</span>
           </div>
         </div>
 
@@ -214,8 +272,9 @@ export default function Home() {
           <span>อุปกรณ์สำนักงาน ไอที เครื่องมือ เฟอร์นิเจอร์ และโซล่าร์รูฟท็อป</span>
         </div>
         <div>
-          <span>Contact Center: 02-XXX-XXXX</span>
-          <span>LINE: @vpowerplus</span>
+          <span>Tel: (083) 178-6446 (คุณรุ้ง)</span>
+          <span>Tel: (061) 057-8761 (คุณกิม)</span>
+          <span>Email: VPowerPlusTH@gmail.com</span>
         </div>
       </footer>
     </main>

@@ -57,7 +57,15 @@ test("server-renders the V Power Plus quotation catalog homepage", async () => {
   assert.match(html, /SHOP/);
   assert.match(html, /V Power Plus Catalog Online/);
   assert.match(html, /ขอใบเสนอราคาเลย/);
-  assert.match(html, /Contact Center: 02-XXX-XXXX/);
+  assert.match(html, /เกี่ยวกับเรา/);
+  assert.match(html, /บทความ/);
+  assert.match(html, /App/);
+  assert.match(html, /\(083\) 178-6446/);
+  assert.match(html, /\(061\) 057-8761/);
+  assert.match(html, /VPowerPlusTH@gmail\.com/);
+  assert.match(html, /อ\.เมือง จ\.หนองบัวลำภู/);
+  assert.doesNotMatch(html, /ช่วยเหลือ/);
+  assert.doesNotMatch(html, /How to/);
 
   for (const category of requiredCategories) {
     assert.match(html, new RegExp(category));
@@ -80,6 +88,8 @@ test("source keeps the final site independent from the starter preview", async (
   assert.match(page, /v-power-plus-logo\.png/);
   assert.match(page, /const categories = \[/);
   assert.match(page, /V Power Plus Catalog Online/);
+  assert.match(page, /<section className="about-section" id="about">/);
+  assert.match(page, /<section className="app-strip" id="app"/);
   assert.match(layout, /lang="th"/);
   assert.doesNotMatch(page, /SkeletonPreview|_sites-preview|codex-preview/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview/);
