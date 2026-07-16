@@ -3,41 +3,49 @@ const categories = [
     name: "อุปกรณ์สำนักงานเบ็ดเตล็ด",
     description: "เครื่องใช้ประจำสำนักงาน อุปกรณ์โต๊ะทำงาน และของใช้ทั่วไป",
     image: "/category-office-supplies.png",
+    slug: "office-supplies",
   },
   {
     name: "อุปกรณ์สำนักงานอิเล็กทรอนิกส์",
     description: "เครื่องคิดเลข โทรศัพท์ ปลั๊กไฟ และอุปกรณ์ไฟฟ้าในสำนักงาน",
     image: "/category-office-electronics.png",
+    slug: "office-electronics",
   },
   {
     name: "เฟอร์นิเจอร์สำนักงาน",
     description: "โต๊ะ เก้าอี้ ตู้เอกสาร ชั้นวาง และเฟอร์นิเจอร์สำหรับออฟฟิศ",
     image: "/category-office-furniture.png",
+    slug: "office-furniture",
   },
   {
     name: "อุปกรณ์และเครื่องมือ",
     description: "เครื่องมือช่าง อุปกรณ์ซ่อมบำรุง อุปกรณ์เซฟตี้ และของใช้หน้างาน",
     image: "/category-tools-equipment.png",
+    slug: "tools-equipment",
   },
   {
     name: "เครื่องดื่ม เครื่องใช้ และผลิตภัณฑ์อื่นๆ",
     description: "สินค้าแคนทีน ผลิตภัณฑ์ทำความสะอาด และของใช้ประจำอาคาร",
     image: "/category-pantry-cleaning.png",
+    slug: "pantry-cleaning",
   },
   {
     name: "อุปกรณ์เครื่องเขียน และผลิตภัณฑ์กระดาษ",
     description: "ปากกา แฟ้ม สมุด กระดาษ แบบฟอร์ม และอุปกรณ์งานเอกสาร",
     image: "/category-stationery-paper.png",
+    slug: "stationery-paper",
   },
   {
     name: "ผลิตภัณฑ์สำหรับคอมพิวเตอร์และไอทีต่างๆ",
     description: "อุปกรณ์ต่อพ่วง หมึกพิมพ์ สายเคเบิล และสินค้าไอทีสำนักงาน",
     image: "/category-computer-it.png",
+    slug: "computer-it",
   },
   {
     name: "ผลิตภัณฑ์สำหรับโซล่าร์รูฟท็อป",
     description: "อุปกรณ์พลังงาน ระบบติดตั้ง และสินค้าเกี่ยวกับ solar rooftop",
     image: "/category-solar-rooftop.png",
+    slug: "solar-rooftop",
     featured: true,
   },
 ];
@@ -196,7 +204,7 @@ export default function Home() {
         <div className="category-grid">
           {categories.map((category) => (
             <article className={category.featured ? "category-card solar-card" : "category-card"} key={category.name}>
-              <a href={category.featured ? "#solar" : "#quote"} aria-label={`${category.name} ขอใบเสนอราคา`}>
+              <a href={`/categories/${category.slug}`} aria-label={`${category.name} ดูรายการสินค้า`}>
                 <span className="category-image">
                   <img src={category.image} alt="" />
                 </span>

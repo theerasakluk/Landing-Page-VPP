@@ -24,13 +24,13 @@ const requiredCategoryImages = [
   "/category-solar-rooftop.png",
 ];
 
-async function render() {
+async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("http://localhost/", {
+    new Request(`http://localhost${path}`, {
       headers: { accept: "text/html" },
     }),
     {
@@ -56,6 +56,9 @@ test("server-renders the V Power Plus quotation catalog homepage", async () => {
   assert.match(html, /VPP/);
   assert.match(html, /SHOP/);
   assert.match(html, /V Power Plus Catalog Online/);
+  assert.match(html, /href="\/categories\/office-supplies"/);
+  assert.match(html, /href="\/categories\/stationery-paper"/);
+  assert.match(html, /href="\/categories\/solar-rooftop"/);
   assert.match(html, /ขอใบเสนอราคาเลย/);
   assert.match(html, /เกี่ยวกับเรา/);
   assert.match(html, /บทความ/);
@@ -103,4 +106,53 @@ test("category image assets exist and are wired into the homepage source", async
     assert.match(page, new RegExp(image.replace("/", "\\/")));
     await access(new URL(`../public${image}`, import.meta.url));
   }
+});
+
+test("category pages render products from the generated Excel data", async () => {
+  const response = await render("/categories/stationery-paper");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /อุปกรณ์เครื่องเขียน และผลิตภัณฑ์กระดาษ/);
+  assert.match(html, /696/);
+  assert.match(html, /ลำดับสินค้า/);
+  assert.match(html, /รหัสสินค้า/);
+  assert.match(html, /รายการสินค้า/);
+  assert.match(html, /รายละเอียดสินค้า/);
+  assert.match(html, /VSP/);
+  assert.match(html, /หนังสือ/);
+  assert.match(html, /หนังสือและสื่อการเรียน/);
+});
+
+test("large categories expose subcategory navigation", async () => {
+  const response = await render("/categories/tools-equipment?group=cleaning-maintenance");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /อุปกรณ์และเครื่องมือ/);
+  assert.match(html, /ทำความสะอาดและดูแลพื้นที่/);
+  assert.match(html, /ทั้งหมด/);
+  assert.match(html, /ไม้ฟองน้ำซับน้ำ|แปรงขัดส้วม|สก๊อต/);
+});
+
+test("solar rooftop category remains available for future products", async () => {
+  const response = await render("/categories/solar-rooftop");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /ผลิตภัณฑ์สำหรับโซล่าร์รูฟท็อป/);
+  assert.match(html, /0/);
+  assert.match(html, /ยังไม่มีรายการสินค้าในหมวดนี้/);
+  assert.match(html, /อัปเดตสินค้าในอนาคต/);
+});
+
+test("generated product data keeps the expected Excel import shape", async () => {
+  const data = await readFile(new URL("../data/products.ts", import.meta.url), "utf8");
+
+  assert.match(data, /export const products = /);
+  assert.match(data, /"categorySlug": "stationery-paper"/);
+  assert.match(data, /"categorySlug": "office-supplies"/);
+  assert.match(data, /"code": "VSP595"/);
+  assert.match(data, /"subcategorySlug": "books-learning"/);
+  assert.match(data, /export function getProductsByCategorySlug/);
 });
