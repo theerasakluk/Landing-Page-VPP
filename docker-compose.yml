@@ -1,0 +1,23 @@
+services:
+  catalog:
+    build:
+      context: .
+    image: vpp-catalog:latest
+    container_name: vpp-catalog
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=n8n_default
+      - traefik.http.routers.vpp-catalog.rule=Host(`vpowerplus.tech`) || Host(`www.vpowerplus.tech`)
+      - traefik.http.routers.vpp-catalog.entrypoints=websecure
+      - traefik.http.routers.vpp-catalog.tls=true
+      - traefik.http.routers.vpp-catalog.tls.certresolver=mytlschallenge
+      - traefik.http.services.vpp-catalog.loadbalancer.server.port=3000
+    networks:
+      - n8n_default
+
+networks:
+  n8n_default:
+    external: true

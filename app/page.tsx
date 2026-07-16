@@ -130,7 +130,7 @@ export default function Home() {
           <h2>เตรียมรายการสินค้าและขอใบเสนอราคาได้สะดวกขึ้น</h2>
         </div>
         <div className="app-actions">
-          <a className="employee-app-button" href="#employee-app" aria-disabled="true">
+          <a className="employee-app-button" href="https://app.vpowerplus.tech">
             App VPP Employee Only
           </a>
           <a className="secondary-button" href="#quote">
