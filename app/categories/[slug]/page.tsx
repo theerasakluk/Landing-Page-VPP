@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import SiteHeader from "@/components/SiteHeader";
 import {
   categoryMeta,
   getCategoryBySlug,
@@ -90,52 +91,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
   return (
     <main className="page-shell category-page-shell">
-      <header className="site-header">
-        <Link className="brand" href="/" aria-label="V Power Plus หน้าแรก">
-          <img src="/v-power-plus-logo.png" alt="V Power Plus" />
-        </Link>
-
-        <form className="search-bar" role="search" aria-label="ค้นหาสินค้า">
-          <label className="sr-only" htmlFor="category-search">
-            ค้นหาสินค้า
-          </label>
-          <input id="category-search" type="search" placeholder="ชื่อสินค้า หรือ รหัสสินค้า" />
-          <select aria-label="เลือกหมวดหมู่" defaultValue={slug}>
-            {categoryMeta.map((item) => (
-              <option key={item.slug} value={item.slug}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-          <button type="submit" aria-label="ค้นหา">
-            ⌕
-          </button>
-        </form>
-
-        <div className="account-links" aria-label="บัญชีและรายการขอราคา">
-          <Link href="/#quote">เข้าสู่ระบบ</Link>
-          <Link href="/#quote">สมัครสมาชิก</Link>
-          <Link className="rfq-pill" href="/#quote" aria-label="รายการขอใบเสนอราคา 0 รายการ">
-            RFQ
-          </Link>
-        </div>
-      </header>
-
-      <nav className="main-nav" aria-label="เมนูหลัก">
-        <Link className="category-menu" href="/#categories">
-          <span aria-hidden="true">≡</span> หมวดหมู่สินค้า
-        </Link>
-        <div className="nav-links">
-          <Link href="/">หน้าแรก</Link>
-          <Link href="/#about">เกี่ยวกับเรา</Link>
-          <Link href="/#articles">บทความ</Link>
-          <Link href="/#app">App</Link>
-        </div>
-        <div className="contact-line">
-          <span>Tel: (083) 178-6446 คุณรุ้ง</span>
-          <span>(061) 057-8761 คุณกิม</span>
-        </div>
-      </nav>
+      <SiteHeader searchCategory={slug} searchId="category-search" />
 
       <header className="category-page-hero">
         <div className="category-page-heading">

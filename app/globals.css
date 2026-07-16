@@ -53,6 +53,18 @@ button {
   cursor: pointer;
 }
 
+.text-link-button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-weight: 500;
+}
+
+.text-link-button:hover {
+  color: var(--orange);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -500,6 +512,26 @@ button {
   color: var(--blue-dark);
   font-size: clamp(1.35rem, 2.2vw, 1.9rem);
   line-height: 1.25;
+}
+
+.app-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.employee-app-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid rgba(97, 175, 62, 0.45);
+  background: rgba(218, 245, 227, 0.72);
+  color: var(--blue-dark);
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .about-section {
@@ -1025,6 +1057,20 @@ button {
   width: 30%;
 }
 
+.product-table th:nth-child(5),
+.product-table td:nth-child(5) {
+  width: 190px;
+}
+
+.table-link {
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
+.table-link:hover {
+  color: var(--green);
+}
+
 .empty-products {
   display: grid;
   gap: 8px;
@@ -1043,6 +1089,75 @@ button {
   margin: 0;
   color: var(--muted);
   line-height: 1.7;
+}
+
+.search-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.search-summary span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(97, 175, 62, 0.28);
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--blue-dark);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.account-panel {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.account-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+
+.account-tabs button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.account-tabs button.active,
+.account-tabs button:hover {
+  border-color: rgba(97, 175, 62, 0.38);
+  background: rgba(218, 245, 227, 0.72);
+  color: var(--blue-dark);
+}
+
+.account-form {
+  padding: 22px 24px 24px;
+}
+
+.form-message {
+  margin: 16px 24px 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(97, 175, 62, 0.28);
+  background: rgba(218, 245, 227, 0.42);
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
+.secondary-action {
+  border: 1px solid var(--blue) !important;
+  background: var(--surface) !important;
+  color: var(--blue-dark) !important;
 }
 
 @media (max-width: 980px) {
@@ -1093,6 +1208,10 @@ button {
   .app-strip,
   .about-content {
     padding: 22px;
+  }
+
+  .app-actions {
+    justify-content: flex-start;
   }
 
   .category-grid {
@@ -1156,7 +1275,8 @@ button {
   }
 
   .primary-button,
-  .secondary-button {
+  .secondary-button,
+  .employee-app-button {
     width: 100%;
   }
 

@@ -88,11 +88,12 @@ test("source keeps the final site independent from the starter preview", async (
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /v-power-plus-logo\.png/);
   assert.match(page, /const categories = \[/);
   assert.match(page, /V Power Plus Catalog Online/);
   assert.match(page, /<section className="about-section" id="about">/);
   assert.match(page, /<section className="app-strip" id="app"/);
+  assert.match(page, /App VPP Employee Only/);
+  assert.match(page, /<SiteHeader \/>/);
   assert.match(layout, /lang="th"/);
   assert.doesNotMatch(page, /SkeletonPreview|_sites-preview|codex-preview/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview/);
@@ -144,6 +145,31 @@ test("solar rooftop category remains available for future products", async () =>
   assert.match(html, /0/);
   assert.match(html, /ยังไม่มีรายการสินค้าในหมวดนี้/);
   assert.match(html, /อัปเดตสินค้าในอนาคต/);
+});
+
+test("search page renders query details and matching products", async () => {
+  const response = await render("/search?q=VSP595&category=all");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /ผลการค้นหาสินค้า/);
+  assert.match(html, /คำค้นหา/);
+  assert.match(html, /VSP595/);
+  assert.match(html, /หมวดหมู่ทั้งหมด/);
+  assert.match(html, /รายการที่เกี่ยวข้อง/);
+  assert.match(html, /href="\/categories\/office-supplies"/);
+});
+
+test("account page renders member registration and login profile surface", async () => {
+  const response = await render("/account?mode=register");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /สมาชิก V Power Plus/);
+  assert.match(html, /สมัครสมาชิก/);
+  assert.match(html, /username/);
+  assert.match(html, /password/);
+  assert.match(html, /Profile/);
 });
 
 test("generated product data keeps the expected Excel import shape", async () => {

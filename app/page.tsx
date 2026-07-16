@@ -1,3 +1,5 @@
+import SiteHeader from "@/components/SiteHeader";
+
 const categories = [
   {
     name: "อุปกรณ์สำนักงานเบ็ดเตล็ด",
@@ -66,51 +68,7 @@ const promoCards = [
 export default function Home() {
   return (
     <main className="page-shell" id="top">
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="V Power Plus หน้าแรก">
-          <img src="/v-power-plus-logo.png" alt="V Power Plus" />
-        </a>
-
-        <form className="search-bar" role="search" aria-label="ค้นหาสินค้า">
-          <label className="sr-only" htmlFor="site-search">
-            ค้นหาสินค้า
-          </label>
-          <input id="site-search" type="search" placeholder="ชื่อสินค้า หรือ รหัสสินค้า" />
-          <select aria-label="เลือกหมวดหมู่">
-            <option>หมวดหมู่ทั้งหมด</option>
-            {categories.map((category) => (
-              <option key={category.name}>{category.name}</option>
-            ))}
-          </select>
-          <button type="submit" aria-label="ค้นหา">
-            ⌕
-          </button>
-        </form>
-
-        <div className="account-links" aria-label="บัญชีและรายการขอราคา">
-          <a href="#quote">เข้าสู่ระบบ</a>
-          <a href="#quote">สมัครสมาชิก</a>
-          <a className="rfq-pill" href="#quote" aria-label="รายการขอใบเสนอราคา 0 รายการ">
-            RFQ
-          </a>
-        </div>
-      </header>
-
-      <nav className="main-nav" aria-label="เมนูหลัก">
-        <a className="category-menu" href="#categories">
-          <span aria-hidden="true">≡</span> หมวดหมู่สินค้า
-        </a>
-        <div className="nav-links">
-          <a href="#top">หน้าแรก</a>
-          <a href="#about">เกี่ยวกับเรา</a>
-          <a href="#articles">บทความ</a>
-          <a href="#app">App</a>
-        </div>
-        <div className="contact-line">
-          <span>Tel: (083) 178-6446 คุณรุ้ง</span>
-          <span>(061) 057-8761 คุณกิม</span>
-        </div>
-      </nav>
+      <SiteHeader />
 
       <section className="hero-banner" aria-label="V Power Plus Shop Online">
         <div className="hero-copy">
@@ -171,9 +129,14 @@ export default function Home() {
           <p className="quote-kicker">V Power Plus App</p>
           <h2>เตรียมรายการสินค้าและขอใบเสนอราคาได้สะดวกขึ้น</h2>
         </div>
-        <a className="secondary-button" href="#quote">
-          ติดต่อสอบถาม App
-        </a>
+        <div className="app-actions">
+          <a className="employee-app-button" href="#employee-app" aria-disabled="true">
+            App VPP Employee Only
+          </a>
+          <a className="secondary-button" href="#quote">
+            ติดต่อสอบถาม App
+          </a>
+        </div>
       </section>
 
       <section className="about-section" id="about">
