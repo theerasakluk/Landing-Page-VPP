@@ -52,7 +52,9 @@ export default function AccountLinks() {
   if (member) {
     return (
       <div className="account-links" aria-label="บัญชีและรายการขอราคา">
-        <Link href="/account">Profile</Link>
+        <Link className="account-username" href="/account" aria-label={`โปรไฟล์ของ ${member.username}`}>
+          {member.username}
+        </Link>
         <button className="text-link-button" type="button" onClick={handleLogout}>
           Logout
         </button>

@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Member = {
   firstName: string;
@@ -32,6 +33,7 @@ type AccountPanelProps = {
 };
 
 export default function AccountPanel({ initialMode = "login" }: AccountPanelProps) {
+  const router = useRouter();
   const [mode, setMode] = useState(() => {
     if (typeof window !== "undefined" && window.localStorage.getItem(SESSION_KEY)) {
       return "profile";
@@ -80,11 +82,10 @@ export default function AccountPanel({ initialMode = "login" }: AccountPanelProp
     }
 
     window.localStorage.setItem(MEMBER_KEY, JSON.stringify(member));
-    window.localStorage.setItem(SESSION_KEY, member.username);
-    setActiveUsername(member.username);
-    setMode("profile");
-    setMessage("สมัครสมาชิกและเข้าสู่ระบบเรียบร้อยแล้ว");
-    notifyAuthChange();
+    setLogin({ username: member.username, password: "" });
+    setMode("login");
+    setMessage("สมัครสมาชิกเรียบร้อยแล้ว กรุณาเข้าสู่ระบบเพื่อใช้งานต่อ");
+    router.replace("/account?mode=login");
   };
 
   const handleLogin = (event: FormEvent<HTMLFormElement>) => {
@@ -93,9 +94,8 @@ export default function AccountPanel({ initialMode = "login" }: AccountPanelProp
     if (login.username === member.username && login.password === member.password) {
       window.localStorage.setItem(SESSION_KEY, member.username);
       setActiveUsername(member.username);
-      setMode("profile");
-      setMessage("เข้าสู่ระบบเรียบร้อยแล้ว");
       notifyAuthChange();
+      router.push("/");
       return;
     }
 
@@ -115,6 +115,7 @@ export default function AccountPanel({ initialMode = "login" }: AccountPanelProp
     setActiveUsername(member.username);
     setMessage("บันทึกข้อมูลโปรไฟล์เรียบร้อยแล้ว");
     notifyAuthChange();
+    window.setTimeout(() => router.push("/"), 1000);
   };
 
   const handleLogout = () => {

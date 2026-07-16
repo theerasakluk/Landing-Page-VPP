@@ -156,6 +156,11 @@ button {
   white-space: nowrap;
 }
 
+.account-username {
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
 .account-links a:hover,
 .nav-links a:hover {
   color: var(--orange);
