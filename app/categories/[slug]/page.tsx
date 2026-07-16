@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import {
   categoryMeta,
   getCategoryBySlug,
@@ -21,6 +22,28 @@ const categoryImages: Record<string, string> = {
   "stationery-paper": "/category-stationery-paper.png",
   "computer-it": "/category-computer-it.png",
   "solar-rooftop": "/category-solar-rooftop.png",
+};
+
+const visualThemes: Record<string, { accent: string; wash: string }> = {
+  "office-supplies": { accent: "#61af3e", wash: "rgba(218, 245, 227, 0.72)" },
+  "office-electronics": { accent: "#0874bb", wash: "rgba(228, 243, 255, 0.78)" },
+  "office-furniture": { accent: "#7a9f38", wash: "rgba(240, 246, 218, 0.76)" },
+  "tools-equipment": { accent: "#4f8f32", wash: "rgba(224, 242, 210, 0.76)" },
+  "pantry-cleaning": { accent: "#36a06f", wash: "rgba(218, 245, 227, 0.76)" },
+  "stationery-paper": { accent: "#0874bb", wash: "rgba(228, 243, 255, 0.76)" },
+  "computer-it": { accent: "#0868a8", wash: "rgba(228, 243, 255, 0.82)" },
+  "solar-rooftop": { accent: "#61af3e", wash: "rgba(223, 244, 200, 0.82)" },
+  "uniform-event": { accent: "#4f8f32", wash: "rgba(223, 244, 200, 0.78)" },
+  "personal-care": { accent: "#36a06f", wash: "rgba(218, 245, 227, 0.78)" },
+  "document-office": { accent: "#0874bb", wash: "rgba(228, 243, 255, 0.78)" },
+  "cleaning-maintenance": { accent: "#36a06f", wash: "rgba(218, 245, 227, 0.78)" },
+  "repair-tools": { accent: "#4f8f32", wash: "rgba(240, 246, 218, 0.78)" },
+  "site-materials": { accent: "#7a9f38", wash: "rgba(223, 244, 200, 0.78)" },
+  "books-learning": { accent: "#0874bb", wash: "rgba(228, 243, 255, 0.78)" },
+  "paper-files": { accent: "#61af3e", wash: "rgba(218, 245, 227, 0.78)" },
+  "writing-tools": { accent: "#0868a8", wash: "rgba(228, 243, 255, 0.72)" },
+  "creative-supplies": { accent: "#36a06f", wash: "rgba(218, 245, 227, 0.72)" },
+  other: { accent: "#7a9f38", wash: "rgba(240, 246, 218, 0.72)" },
 };
 
 export function generateStaticParams() {
@@ -59,6 +82,10 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     ? allProducts.filter((product) => product.subcategorySlug === activeGroup)
     : allProducts;
   const activeGroupLabel = subcategories.find((group) => group.slug === activeGroup)?.label;
+  const visualLabel = activeGroupLabel ?? category.name;
+  const visualEyebrow = activeGroupLabel ? "หมวดหมู่ย่อย" : "หมวดหมู่หลัก";
+  const visualCountLabel = activeGroupLabel ? "รายการในหมวดย่อย" : "รายการสินค้า";
+  const visualTheme = visualThemes[activeGroup || slug] ?? visualThemes.other;
   const categoryImage = categoryImages[slug] ?? "/category-office-supplies.png";
 
   return (
@@ -125,13 +152,25 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
               </Link>
             </div>
           </div>
-          <div className="category-visual" aria-hidden="true">
+          <div
+            className="category-visual"
+            style={
+              {
+                "--category-accent": visualTheme.accent,
+                "--category-wash": visualTheme.wash,
+              } as CSSProperties
+            }
+          >
             <span className="category-visual-image">
               <img src={categoryImage} alt="" />
             </span>
+            <span className="category-visual-label">
+              <span>{visualEyebrow}</span>
+              <strong>{visualLabel}</strong>
+            </span>
             <span className="category-visual-count">
-              <strong>{allProducts.length.toLocaleString("th-TH")}</strong>
-              รายการสินค้า
+              <strong>{visibleProducts.length.toLocaleString("th-TH")}</strong>
+              {visualCountLabel}
             </span>
           </div>
         </div>

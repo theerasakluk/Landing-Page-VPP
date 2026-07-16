@@ -830,13 +830,25 @@ button {
   min-height: 210px;
   display: grid;
   place-items: center;
+  align-content: center;
   background:
-    radial-gradient(circle at 70% 18%, rgba(97, 175, 62, 0.2), transparent 34%),
+    radial-gradient(circle at 70% 18%, var(--category-wash, rgba(97, 175, 62, 0.2)), transparent 34%),
     linear-gradient(135deg, #ffffff, rgba(228, 243, 255, 0.68));
   border-left: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.category-visual::before {
+  content: "";
+  position: absolute;
+  inset: 24px 30px;
+  border: 1px solid color-mix(in srgb, var(--category-accent, var(--green)) 26%, transparent);
+  background: rgba(255, 255, 255, 0.36);
 }
 
 .category-visual-image {
+  position: relative;
+  z-index: 1;
   width: 156px;
   height: 156px;
   border-radius: 50%;
@@ -853,8 +865,36 @@ button {
   filter: drop-shadow(0 10px 14px rgba(39, 49, 58, 0.12));
 }
 
+.category-visual-label {
+  position: absolute;
+  z-index: 2;
+  left: 16px;
+  top: 16px;
+  display: grid;
+  gap: 3px;
+  max-width: calc(100% - 32px);
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.86);
+  border-left: 4px solid var(--category-accent, var(--green));
+  box-shadow: 0 12px 30px rgba(39, 49, 58, 0.08);
+}
+
+.category-visual-label span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.category-visual-label strong {
+  color: var(--blue-dark);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
 .category-visual-count {
   position: absolute;
+  z-index: 2;
   right: 16px;
   bottom: 16px;
   display: grid;
@@ -870,7 +910,7 @@ button {
 }
 
 .category-visual-count strong {
-  color: var(--green);
+  color: var(--category-accent, var(--green));
   font-size: 2rem;
   line-height: 1;
 }
@@ -1069,6 +1109,14 @@ button {
     border-left: 0;
     border-top: 1px solid var(--line);
   }
+
+  .category-visual::before {
+    inset: 18px 20px;
+  }
+
+  .category-visual-label {
+    max-width: min(60%, 260px);
+  }
 }
 
 @media (max-width: 620px) {
@@ -1183,6 +1231,19 @@ button {
 
   .category-visual-count {
     min-width: 88px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .category-visual-label {
+    left: 10px;
+    top: 10px;
+    max-width: calc(100% - 20px);
+    padding: 8px 10px;
+  }
+
+  .category-visual-label strong {
+    font-size: 0.82rem;
   }
 
   .subcategory-nav a {
